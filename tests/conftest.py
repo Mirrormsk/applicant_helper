@@ -33,3 +33,35 @@ def some_vacancy_2():
         employer="Тестовый работодатель",
     )
     return vacancy
+
+@pytest.fixture
+def some_vacancy_without_salary_from():
+    vacancy = Vacancy(
+        id=2,
+        name="Тестовая вакансия",
+        salary_from=None,
+        salary_to=190_000,
+        currency="rub",
+        area="Тестовый город",
+        full_address="Г.Тестовый, ул Тестовая, 2",
+        url="https://test.ru",
+        requirements="Тестовый текст обязанностей в <highlighttext>вакансии номер 3</highlighttext>",
+        employer="Тестовый работодатель",
+    )
+    return vacancy
+
+@pytest.fixture
+def some_vacancy_without_salary_to():
+    vacancy = Vacancy(
+        id=2,
+        name="Тестовая вакансия",
+        salary_from=140_000,
+        salary_to=None,
+        currency="rub",
+        area="Тестовый город",
+        full_address="Г.Тестовый, ул Тестовая, 2",
+        url="https://test.ru",
+        requirements="Тестовый текст обязанностей в <highlighttext>вакансии номер 3</highlighttext>",
+        employer="Тестовый работодатель",
+    )
+    return vacancy

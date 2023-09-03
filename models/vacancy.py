@@ -152,6 +152,21 @@ class Vacancy:
             f"requirements='{self.requirements}', employer='{self.employer}')"
         )
 
+    def __str__(self):
+        return (
+            f"{self.name.upper()}\n"
+            f"{'*'* len(self.name)}\n"
+            f"Работодатель: {self.employer}\n"
+            f"Зарплата: {'от ' if not self.salary_to else ''}"
+            f"{str(self.salary_from) if self.salary_from else 'до '}"
+            f"{' - ' if self.salary_from and self.salary_to else ''}"
+            f"{str(self.salary_to) if self.salary_to else ''}"
+            f"{' ' + self.currency if self.currency else ''}\n"
+            f"Адрес: {self.full_address}\n"
+            f"Обязанности: {self.requirements}\n"
+            f"Ссылка: {self.url}"
+        )
+
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             raise ValueError(
