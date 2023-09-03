@@ -75,7 +75,3 @@ class HeadHunterParser(APIParser):
 
         return objects_list
 
-
-if __name__ == "__main__":
-    hh_parser = HeadHunterParser()
-    print(hh_parser._get_raw_vacancies("python")[:10])

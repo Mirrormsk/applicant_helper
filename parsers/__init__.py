@@ -1,1 +1,2 @@
 from parsers.hh_parser import HeadHunterParser
+from parsers.superjob_parser import SuperJobParser
