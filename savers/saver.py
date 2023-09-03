@@ -60,6 +60,10 @@ class Saver(ABC):
     def get_all_vacancies(self):
         return self.vacancies
 
+    @property
+    def total_vacancies(self):
+        return len(self.vacancies)
+
     def clear(self):
         self.vacancies.clear()
         self.save()
