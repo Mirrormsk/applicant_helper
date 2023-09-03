@@ -1,0 +1,1 @@
+from parsers.hh_parser import HeadHunterParser
