@@ -6,6 +6,7 @@ import requests
 from models.vacancy import Vacancy
 from parsers.parser import APIParser
 
+from utils.safe_request import get_request_safe
 
 class SuperJobParser(APIParser):
 
@@ -27,7 +28,7 @@ class SuperJobParser(APIParser):
             "page": page,
             "count": 100,
         }
-        response = requests.get(self.api_url, headers=headers, params=params)
+        response = get_request_safe(self.api_url, headers=headers, params=params)
         return response.json()
 
     def _get_raw_vacancies(self, query):

@@ -5,6 +5,8 @@ import requests
 from models.vacancy import Vacancy
 from parsers.parser import APIParser
 
+from utils.safe_request import get_request_safe
+
 
 class HeadHunterParser(APIParser):
     def __init__(self):
@@ -25,7 +27,7 @@ class HeadHunterParser(APIParser):
             # "schedule": "remote",
             "only_with_salary": True,
         }
-        response = requests.get(url=url, headers=headers, params=params)
+        response = get_request_safe(url=url, headers=headers, params=params)
         return response.json()
 
     @classmethod
