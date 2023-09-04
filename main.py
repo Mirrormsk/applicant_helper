@@ -98,7 +98,7 @@ def main():
     # Запрос на фильтрацию по ключевым словам
     if enquiries.confirm("Отфильтровать вакансии по ключевым словам?"):
         filter_words = input("Введите слова для поиска через пробел -> ").split()
-        vacancies = actions.filter_vacancies(vacancies, filter_words)
+        vacancies = actions.filter_by_keywords(vacancies, filter_words)
 
     # Запрос на сортировку
     if enquiries.confirm("Отсортировать вакансии по зарплате?"):
