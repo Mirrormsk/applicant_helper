@@ -23,9 +23,21 @@ def test_add(some_vacancy):
     assert csv_saver.total_vacancies == 1
 
 
-def test_delete(some_vacancy):
+def test_delete(some_vacancy, some_vacancy_2, some_vacancy_3):
     csv_saver.delete_vacancy(some_vacancy)
     assert csv_saver.total_vacancies == 0
+
+    csv_saver.add_vacancies([some_vacancy, some_vacancy_2, some_vacancy_3])
+    csv_saver.delete_vacancy(some_vacancy_3)
+
+    assert csv_saver.vacancies == [some_vacancy, some_vacancy_2, ]
+
+    csv_saver.delete_vacancy(some_vacancy_2)
+
+    assert csv_saver.vacancies == [some_vacancy,]
+
+    csv_saver.delete_vacancy(some_vacancy)
+
 
 
 def test_add_vacancies(
