@@ -1,7 +1,9 @@
 from utils import actions
 
 
-def test_filter_by_keywords(vacancy_python_php, vacancy_python_java_go, vacancy_python_java):
+def test_filter_by_keywords(
+    vacancy_python_php, vacancy_python_java_go, vacancy_python_java
+):
 
     # Проверка фильтрации по одному слову
     vacancies = [vacancy_python_php, vacancy_python_java_go]
@@ -14,8 +16,7 @@ def test_filter_by_keywords(vacancy_python_php, vacancy_python_java_go, vacancy_
 
     # проверка фильтрации по нескольким словам
 
-    search_query = 'java go'.split()
+    search_query = "java go".split()
     filtered = actions.filter_by_keywords(vacancies, search_query)
 
     assert filtered == [vacancy_python_java_go]
-

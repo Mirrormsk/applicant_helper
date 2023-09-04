@@ -35,6 +35,7 @@ def some_vacancy_2():
     )
     return vacancy
 
+
 @pytest.fixture
 def some_vacancy_3():
     vacancy = Vacancy(
@@ -118,6 +119,7 @@ def vacancy_python_java_go():
         employer="Тестовый работодатель",
     )
     return vacancy
+
 
 @pytest.fixture
 def vacancy_python_java():
