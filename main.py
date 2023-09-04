@@ -7,6 +7,8 @@ import config
 from utils import actions
 from utils.table import table
 
+from exceptions.api_exceptions import ApiConnectionError
+
 
 def main():
     # Список для дальнейшего хранения вакансий
@@ -57,10 +59,18 @@ def main():
     # Сбор вакансий
     for platform in tqdm.tqdm(chosen_platforms, desc="Сбор данных с платформ"):
         platform = platform()
-        platform_vacancies = platform.get_vacancies(user_query)
-        all_vacancies.extend(platform_vacancies)
+        try:
+            platform_vacancies = platform.get_vacancies(user_query)
+            all_vacancies.extend(platform_vacancies)
+        except ApiConnectionError:
+            print(f'Не удалось подключиться к платформе {platform.__class__.__name__}')
 
     print(f"Всего найдено {len(all_vacancies)} вакансий.")
+
+    # Если не удалось подключиться ни к одному из API
+    if not all_vacancies:
+        print(f'Не удалось получить ни одной вакансии. Проверьте подключение, или измените запрос.')
+        return
 
     # Выбор формата для сохранения результатов в файл
     saver_choice = enquiries.choose(
