@@ -12,11 +12,14 @@ def sort_by_salary(vacancy: Vacancy):
 def has_words(vacancy: Vacancy, filter_words: list[str]):
     """Вспомогательная функция для фильтрации по ключевым словам"""
 
+    # Разбиваем название и обязанности на отдельные слова и соединяем
+    # в одно множество
     name = vacancy.name.lower().replace(",", " ").split()
     requirements = vacancy.requirements.lower().replace(",", " ").split()
 
     vacancy_text = set(name) | set(requirements)
 
+    # Возвращаем является ли поисковая фраза подмножеством
     return set(filter_words) < vacancy_text
 
 
