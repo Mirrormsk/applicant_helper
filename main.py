@@ -159,6 +159,7 @@ def main():
                 # Обновление таблицы и вывод
                 table.clear()
                 table.add_vacancies(vacancies)
+                table.min_width = config.Table.min_width
                 print(table)
             elif user_action == "continue":
                 continue
