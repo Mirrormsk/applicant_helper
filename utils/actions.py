@@ -11,10 +11,13 @@ def sort_by_salary(vacancy: Vacancy):
 
 def has_words(vacancy: Vacancy, filter_words: list[str]):
     """Вспомогательная функция для фильтрации по ключевым словам"""
-    vacancy_text = set(
-        vacancy.name.lower().split() + vacancy.requirements.lower().split()
-    )
-    return set(filter_words) in vacancy_text
+
+    name = vacancy.name.lower().replace(",", " ").split()
+    requirements = vacancy.requirements.lower().replace(",", " ").split()
+
+    vacancy_text = set(name) | set(requirements)
+
+    return set(filter_words) < vacancy_text
 
 
 def sort_vacancies(vacancies: list[Vacancy], highest_first=True):
@@ -25,7 +28,7 @@ def sort_vacancies(vacancies: list[Vacancy], highest_first=True):
     return sorted(vacancies, key=sort_by_salary, reverse=highest_first)
 
 
-def filter_vacancies(vacancies: list[Vacancy], words_to_filter: list[str]):
+def filter_by_keywords(vacancies: list[Vacancy], words_to_filter: list[str]):
     """Функция фильтрации вакансий по наличию ключевых слов"""
     filtered = []
 
