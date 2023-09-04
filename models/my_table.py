@@ -15,6 +15,5 @@ class MyTable(PrettyTable):
             [
                 [num] + vacancy.to_print()
                 for num, vacancy in enumerate(vacancies, start=1)
-            ]
+            ][::-1]
         )
-
