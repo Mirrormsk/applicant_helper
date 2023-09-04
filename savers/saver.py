@@ -29,8 +29,15 @@ class Saver(ABC):
             self.add_vacancy(vacancy, save_data=False)
         self.save()
 
+    def find_vacancy_by_id(self, vacancy_id):
+        """Найти вакансию в списке по идентификатору"""
+        for index, vacancy in enumerate(self.vacancies):
+            if vacancy.id == vacancy_id:
+                return index, vacancy
+        return None, None
+
     def delete_vacancy(self, vacancy: Vacancy):
-        """Удалить вакансию из файла"""
+        """Удалить вакансию из списка по объекту vacancy"""
         self.vacancies.remove(vacancy)
         self.save()
 
