@@ -4,10 +4,8 @@ import enquiries
 import tqdm
 
 import config
-from utils.table import table
-
-
 from utils import actions
+from utils.table import table
 
 
 def main():
@@ -104,19 +102,21 @@ def main():
     if enquiries.confirm("Отсортировать вакансии по зарплате?"):
         vacancies = actions.sort_vacancies(vacancies)
 
-    # Добавляем данные в таблицу
-    table.add_vacancies(vacancies)
-
     # Вывод данных
     if not vacancies:
         print("Не нашлось вакансий с выбранными критериями")
     else:
+        # Добавляем данные в таблицу
+        table.add_vacancies(vacancies)
+
+        # Печать таблицы
         print(table)
 
         # Цикл работы с вакансиями индивидуально
-
         while True:
-            user_vacancy_choice = input("\nВведите номер вакансии для выбора действия -> ")
+            user_vacancy_choice = input(
+                "\nВведите номер вакансии для выбора действия -> "
+            )
 
             if not user_vacancy_choice.isdigit() or not 1 <= int(
                 user_vacancy_choice
@@ -126,6 +126,7 @@ def main():
 
             chosen_vacancy = vacancies[int(user_vacancy_choice) - 1]
 
+            # Варианты пользовательских действий
             vacancy_actions = {
                 "Посмотреть полную информацию": "review",
                 "Удалить вакансию": "delete",
@@ -144,6 +145,8 @@ def main():
             elif user_action == "delete":
                 saver.delete_vacancy(chosen_vacancy)
                 vacancies.remove(chosen_vacancy)
+
+                # Обновление таблицы и вывод
                 table.clear()
                 table.add_vacancies(vacancies)
                 print(table)
