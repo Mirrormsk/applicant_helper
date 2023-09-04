@@ -167,15 +167,8 @@ class Vacancy:
             f"Ссылка: {self.url}"
         )
 
-    # def __eq__(self, other):
-    #     if not isinstance(other, self.__class__):
-    #         raise ValueError(
-    #             f"Класс  {self.__class__} поддерживает сравнение только"
-    #             f"с экземплярами своего класса"
-    #         )
-    #     return max(self.salary_from, self.salary_to) == max(
-    #         other.salary_from, other.salary_to
-    #     )
+    def __eq__(self, other):
+        return self.id == other.id
 
     def __lt__(self, other):
         if not isinstance(other, self.__class__):
