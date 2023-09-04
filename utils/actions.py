@@ -2,7 +2,7 @@ from models.vacancy import Vacancy
 from savers.saver import Saver
 
 
-def sort_by_salary(vacancy: Vacancy):
+def _sort_by_salary(vacancy: Vacancy):
     """Вспомогательная функция для сортировки по зарплате"""
     if vacancy.salary_to:
         return vacancy.salary_to
@@ -28,7 +28,7 @@ def sort_vacancies(vacancies: list[Vacancy], highest_first=True):
     Сортирует по верхней границе. Если ее нет, то
     по нижней.
     """
-    return sorted(vacancies, key=sort_by_salary, reverse=highest_first)
+    return sorted(vacancies, key=_sort_by_salary, reverse=highest_first)
 
 
 def filter_by_keywords(vacancies: list[Vacancy], words_to_filter: list[str]):
@@ -56,6 +56,8 @@ def filter_by_salary(saver: Saver):
 
     if salary_from:
         salary_from = int(salary_from)
+    else:
+        salary_from = 0
 
     # Поучение верхней границы
     salary_to = input("Введите верхнюю границу -> ")
@@ -65,6 +67,8 @@ def filter_by_salary(saver: Saver):
 
     if salary_to:
         salary_to = int(salary_to)
+    else:
+        salary_to = float("inf")
 
     result = saver.get_vacancies_by_salary(salary_from, salary_to)
 
