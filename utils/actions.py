@@ -17,12 +17,12 @@ def has_words(vacancy: Vacancy, filter_words: list[str]):
     return set(filter_words) in vacancy_text
 
 
-def sort_vacancies(vacancies: list[Vacancy], reverse=False):
+def sort_vacancies(vacancies: list[Vacancy], highest_first=True):
     """Функция для сортировки по зарплате.
     Сортирует по верхней границе. Если ее нет, то
     по нижней.
     """
-    return sorted(vacancies, key=sort_by_salary, reverse=reverse)
+    return sorted(vacancies, key=sort_by_salary, reverse=highest_first)
 
 
 def filter_vacancies(vacancies: list[Vacancy], words_to_filter: list[str]):
@@ -30,8 +30,9 @@ def filter_vacancies(vacancies: list[Vacancy], words_to_filter: list[str]):
     filtered = []
 
     for vacancy in vacancies:
-        if has_words(vacancy, words_to_filter):
-            filtered.append(vacancy)
+        if vacancy.requirements:
+            if has_words(vacancy, words_to_filter):
+                filtered.append(vacancy)
 
     return filtered
 
